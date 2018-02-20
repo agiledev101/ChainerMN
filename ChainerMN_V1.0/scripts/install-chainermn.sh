@@ -82,26 +82,26 @@ install_chainermn()
 install_intel_mpi
 {
 #install_Intel _MPI
-		if [ ! -d /opt/l_mpi_2017.3.196 ]; then
+		if [ ! -d /opt/l_mpi_2018.1.163 ]; then
 			cd /opt
 			sudo mv intel intel_old
 			#PKG_Name=l_mpi_2017.3.196.tgz
 			#PKG_Name=l_mpi_2018.1.163.tgz
 			#PKG_Name=l_mpi-rt_p_5.1.3.223.tgz.gz
-			#sudo curl -L -O http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/12414/l_mpi_2018.1.163.tgz
-			#sudo tar zxvf l_mpi_2018.1.163.tgz
-			#sudo rm -rf l_mpi_2018.1.163.tgz
-			#cd l_mpi_2018.1.163
+			sudo curl -L -O http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/12414/l_mpi_2018.1.163.tgz
+			sudo tar zxvf l_mpi_2018.1.163.tgz
+			sudo rm -rf l_mpi_2018.1.163.tgz
+			cd l_mpi_2018.1.163
 			#sudo curl -L -O http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/11595/${PKG_Name}
-			sudo curl -L -O https://pfnresources.blob.core.windows.net/chainermn-v1-packages/${PKG_Name}
-			gzip -d ${PKG_Name}
-			sudo tar zxvf l_mpi-rt_p_5.1.3.223.tgz
-			sudo rm -rf l_mpi-rt_p_5.1.3.223.tgz
-			cd l_mpi-rt_p_5.1.3.223
+			#sudo curl -L -O https://pfnresources.blob.core.windows.net/chainermn-v1-packages/${PKG_Name}
+			#gzip -d ${PKG_Name}
+			#sudo tar zxvf l_mpi-rt_p_5.1.3.223.tgz
+			#sudo rm -rf l_mpi-rt_p_5.1.3.223.tgz
+			#cd l_mpi-rt_p_5.1.3.223
 			sudo sed -i -e "s/decline/accept/g" silent.cfg
 			sudo ./install.sh --silent silent.cfg
-			wget https://pfnresources.blob.core.windows.net/chainermn-v1-packages/mpicc
-			mv mpicc /opt/intel/compilers_and_libraries_2018.1.163/linux/mpi/intel64/bin/
+			#wget https://pfnresources.blob.core.windows.net/chainermn-v1-packages/mpicc
+			#mv mpicc /opt/intel/compilers_and_libraries_2018.1.163/linux/mpi/intel64/bin/
 		fi
 
 		if grep -q "I_MPI" ~/.bashrc; then :; else
@@ -110,8 +110,8 @@ install_intel_mpi
 			echo 'export I_MPI_DYNAMIC_CONNECTION=0' >> ~/.bashrc
 			echo 'export I_MPI_FALLBACK_DEVICE=0' >> ~/.bashrc
 			echo 'export PATH=/usr/local/cuda/bin:$PATH' >> ~/.bashrc
-			#echo 'source /opt/intel/compilers_and_libraries_2018.1.163/linux/mpi/intel64/bin/mpivars.sh' >> ~/.bashrc	
-			echo 'source /opt/intel/compilers_and_libraries_2016.3.223/linux/mpi/intel64/bin/mpivars.sh' >> ~/.bashrc	
+			echo 'source /opt/intel/compilers_and_libraries_2018.1.163/linux/mpi/intel64/bin/mpivars.sh' >> ~/.bashrc	
+			#echo 'source /opt/intel/compilers_and_libraries_2016.3.223/linux/mpi/intel64/bin/mpivars.sh' >> ~/.bashrc	
 			#echo 'source /opt/intel/compilers_and_libraries_2017.4.196/linux/mpi/intel64/bin/mpivars.sh' >> ~/.bashrc
 		fi	
 }
@@ -267,8 +267,8 @@ setup_chainermn_gpu_infiniband()
 		#install Chainer V3.1.0
 		install_Chainer		
 		#MPICC=/opt/intel/compilers_and_libraries_2017.4.196/linux/mpi/intel64/bin/mpicc pip install mpi4py --no-cache-dir
-		MPICC=/opt/intel/compilers_and_libraries_2016.3.223/linux/mpi/intel64/bin/mpicc pip install mpi4py --no-cache-dir
-		#MPICC=/opt/intel/compilers_and_libraries_2018.1.163/linux/mpi/intel64/bin/mpicc pip install mpi4py --no-cache-dir
+		#MPICC=/opt/intel/compilers_and_libraries_2016.3.223/linux/mpi/intel64/bin/mpicc pip install mpi4py --no-cache-dir
+		MPICC=/opt/intel/compilers_and_libraries_2018.1.163/linux/mpi/intel64/bin/mpicc pip install mpi4py --no-cache-dir
 		
 		install_chainermn
 		alias python=python3
